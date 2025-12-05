@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { COMPANY_NAME, NAV_LINKS, PHONE_NUMBER, PHONE_LINK } from '../constants';
 import { Button } from './Button';
@@ -47,13 +48,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
 
     if (linkName === 'About') {
         page = 'about';
-        targetId = undefined; // Scroll to top of About
+        targetId = undefined; 
     } else if (linkName === 'Contact') {
         page = 'contact';
-        targetId = undefined; // Scroll to top of Contact page
+        targetId = undefined;
     } else if (linkName === 'Services') {
         page = 'home'; 
         targetId = 'services';
+    } else if (linkName === 'Blog') {
+        page = 'blog';
+        targetId = undefined;
     } else {
         // Home
         page = 'home';
@@ -92,7 +96,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
                 onClick={(e) => handleLinkClick(e, link.name, link.href)}
                 className={`text-sm font-medium transition-colors ${
                   (activePage === 'about' && link.name === 'About') || 
-                  (activePage === 'contact' && link.name === 'Contact')
+                  (activePage === 'contact' && link.name === 'Contact') ||
+                  (activePage === 'blog' && link.name === 'Blog')
                   ? 'text-electric' 
                   : 'text-slate-lighter hover:text-electric'
                 }`}

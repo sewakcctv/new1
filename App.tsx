@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -13,6 +12,8 @@ import { Brands } from './components/Brands';
 import { Industries } from './components/Industries';
 import { Careers } from './components/Careers';
 import { Gallery } from './components/Gallery';
+import { Blog, posts as blogList } from './components/Blog';
+import { BlogPost, BlogPostProps } from './components/BlogPost';
 import { ServiceDetail, ServicePageProps } from './components/ServiceDetail';
 
 // --- ICONS ---
@@ -221,11 +222,75 @@ const videoMonitoringData: ServicePageProps = {
     brands: ["Avigilon", "Hikvision", "Dahua", "Alerted Security"]
 };
 
+// --- BLOG CONTENT DEFINITIONS ---
+
+// Helper function to create rich blog content
+const createRichContent = (id: number) => {
+    if (id === 1) {
+        return (
+            <>
+                <h2 className="text-2xl font-bold text-slate-lighter mt-8 mb-4">The Rising Threat of Porch Piracy</h2>
+                <p>
+                    As online shopping continues to grow, so does the opportunity for "porch pirates" to strike. In the Peel Region alone, 
+                    reports of stolen packages have risen significantly over the past two years. The convenience of next-day delivery 
+                    often comes with the risk of leaving valuable items unattended on your doorstep for hours.
+                </p>
+                <p>
+                    For residents in Brampton and Mississauga, this is becoming a daily frustration. But there are proven ways to deter these opportunists.
+                </p>
+                
+                <h2 className="text-2xl font-bold text-slate-lighter mt-8 mb-4">1. Install a Video Doorbell</h2>
+                <p>
+                    A video doorbell is your first line of defense. The mere presence of a camera is often enough to deter casual thieves. 
+                    Modern systems like Hikvision or Ring allow you to answer the door remotely via your smartphone, giving the impression 
+                    that someone is home even when you're at work.
+                </p>
+
+                <h2 className="text-2xl font-bold text-slate-lighter mt-8 mb-4">2. Use Smart Delivery Lockers</h2>
+                <p>
+                    If you can't be home, consider using secure pickup locations. Many couriers now offer secure lockers at gas stations 
+                    and grocery stores. While less convenient than doorstep delivery, it guarantees your package makes it into your hands.
+                </p>
+                
+                <h2 className="text-2xl font-bold text-slate-lighter mt-8 mb-4">3. Upgrade to AI-Powered Cameras</h2>
+                <p>
+                    Traditional motion sensors trigger for everything—wind, squirrels, and passing cars. AI-powered cameras specifically 
+                    detect humans and vehicles. You can set up alerts to notify you immediately when a person approaches your porch, 
+                    allowing you to trigger a siren or speak through the two-way audio to scare them off.
+                </p>
+            </>
+        );
+    }
+    // Default dummy content for other posts
+    return (
+        <>
+            <p className="text-xl font-medium text-slate-lighter mb-6">
+                Security is not just about technology; it's about strategy. In this article, we explore the fundamental principles that keep your property safe.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <h2 className="text-2xl font-bold text-slate-lighter mt-8 mb-4">Why Professional Grade Matters</h2>
+            <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mt-4 text-slate-light">
+                <li>Reliability in extreme weather conditions.</li>
+                <li>Secure, encrypted data transmission.</li>
+                <li>Long-term support and firmware updates.</li>
+            </ul>
+        </>
+    );
+};
+
 // --- END DATA DEFINITIONS ---
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('home');
   const [currentServiceData, setCurrentServiceData] = useState<ServicePageProps>(securityCameraData);
+  const [currentBlogPost, setCurrentBlogPost] = useState<BlogPostProps | null>(null);
 
   const handleNavigate = (page: string, targetId?: string) => {
     setActivePage(page);
@@ -276,6 +341,19 @@ const App: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleBlogPostClick = (postId: number) => {
+      const postSummary = blogList.find(p => p.id === postId);
+      if (postSummary) {
+          setCurrentBlogPost({
+              ...postSummary,
+              author: "Sewak Team", // Default author if not in summary
+              content: createRichContent(postId)
+          });
+          setActivePage('blog-post');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+  };
+
   return (
     <div className="min-h-screen bg-navy-900 text-slate-lighter font-sans selection:bg-electric selection:text-navy-900 flex flex-col">
       <Navbar onNavigate={handleNavigate} activePage={activePage} />
@@ -301,6 +379,13 @@ const App: React.FC = () => {
             <Careers />
         ) : activePage === 'gallery' ? (
             <Gallery />
+        ) : activePage === 'blog' ? (
+            <Blog onReadMore={handleBlogPostClick} />
+        ) : activePage === 'blog-post' && currentBlogPost ? (
+            <BlogPost 
+                {...currentBlogPost}
+                onBack={() => handleNavigate('blog')}
+            />
         ) : activePage === 'service-detail' ? (
             <ServiceDetail 
                 {...currentServiceData} 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NAV_LINKS, PHONE_NUMBER, PHONE_LINK } from '../constants';
 
@@ -45,6 +46,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         targetId = undefined;
     } else if (linkName === 'Gallery') {
         page = 'gallery';
+        targetId = undefined;
+    } else if (linkName === 'Blog') {
+        page = 'blog';
         targetId = undefined;
     } else {
         // Home
