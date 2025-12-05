@@ -37,11 +37,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     } else if (linkName === 'Industries') {
         page = 'industries';
         targetId = undefined;
-    } else if (linkName === 'Brands' || linkName === 'Our Partners') {
+    } else if (linkName === 'Brands' || linkName === 'Brands & Partners') {
         page = 'brands';
         targetId = undefined;
     } else if (linkName === 'Careers') {
         page = 'careers';
+        targetId = undefined;
+    } else if (linkName === 'Gallery') {
+        page = 'gallery';
         targetId = undefined;
     } else {
         // Home
@@ -119,11 +122,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <li>
                   <a 
                     href="#brands"
-                    onClick={(e) => handleLinkClick(e, 'Our Partners', '#brands')}
+                    onClick={(e) => handleLinkClick(e, 'Brands & Partners', '#brands')}
                     className="text-slate-light hover:text-electric transition-colors text-sm flex items-center"
                   >
                     <span className="w-1.5 h-1.5 bg-electric rounded-full mr-2 opacity-0 hover:opacity-100 transition-opacity"></span>
-                    Our Partners
+                    Brands & Partners
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#gallery"
+                    onClick={(e) => handleLinkClick(e, 'Gallery', '#gallery')}
+                    className="text-slate-light hover:text-electric transition-colors text-sm flex items-center"
+                  >
+                    <span className="w-1.5 h-1.5 bg-electric rounded-full mr-2 opacity-0 hover:opacity-100 transition-opacity"></span>
+                    Gallery
                   </a>
                 </li>
                 <li>

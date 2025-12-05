@@ -30,13 +30,13 @@ export const Brands: React.FC<BrandsProps> = ({ onGetQuote }) => {
       {/* Logos Grid */}
       <section className="bg-navy-800 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                 {brandsList.map((brand, index) => (
                     <div 
                         key={index}
-                        className="bg-navy-900 h-32 md:h-40 rounded-lg border border-navy-700 flex items-center justify-center p-6 group hover:border-electric transition-all duration-300 hover:shadow-[0_0_20px_rgba(100,255,218,0.1)]"
+                        className="bg-navy-900 h-28 md:h-40 rounded-lg border border-navy-700 flex items-center justify-center p-4 group hover:border-electric transition-all duration-300 hover:shadow-[0_0_20px_rgba(100,255,218,0.1)]"
                     >
-                        <span className="text-xl md:text-2xl font-bold text-slate-light group-hover:text-electric transition-colors tracking-wide">
+                        <span className="text-lg md:text-2xl font-bold text-slate-light group-hover:text-electric transition-colors tracking-wide text-center break-words">
                             {brand}
                         </span>
                     </div>
@@ -48,14 +48,14 @@ export const Brands: React.FC<BrandsProps> = ({ onGetQuote }) => {
       {/* CTA Section */}
       <section className="bg-navy-900 py-20 border-t border-navy-700">
         <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-slate-lighter mb-6">Looking for a specific brand?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-lighter mb-6">Looking for a specific brand?</h2>
             <p className="text-slate-light text-lg mb-8">
                 We are certified installers for all the major manufacturers listed above. 
                 If you have a specific hardware requirement for your project, let us know.
             </p>
             <Button 
                 variant="primary" 
-                className="px-8 py-4 text-lg"
+                className="w-full md:w-auto px-8 py-4 text-lg"
                 onClick={onGetQuote}
             >
                 Get a Quote for Specific Hardware

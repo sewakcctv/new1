@@ -80,7 +80,7 @@ export const Careers: React.FC = () => {
 
             {/* Right Column: Application Form */}
             <div>
-              <div className="bg-navy-900 p-8 rounded-xl border border-navy-700 shadow-xl sticky top-24">
+              <div className="bg-navy-900 p-8 rounded-xl border border-navy-700 shadow-xl lg:sticky lg:top-24">
                 <h2 className="text-2xl font-bold text-slate-lighter mb-2">Apply Now</h2>
                 <p className="text-slate-light mb-8 text-sm">Fill out the form below to be considered for this position.</p>
 

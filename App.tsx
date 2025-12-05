@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -11,6 +12,7 @@ import { Contact } from './components/Contact';
 import { Brands } from './components/Brands';
 import { Industries } from './components/Industries';
 import { Careers } from './components/Careers';
+import { Gallery } from './components/Gallery';
 import { ServiceDetail, ServicePageProps } from './components/ServiceDetail';
 
 // --- ICONS ---
@@ -297,6 +299,8 @@ const App: React.FC = () => {
             <Industries onGetQuote={() => handleNavigate('contact')} />
         ) : activePage === 'careers' ? (
             <Careers />
+        ) : activePage === 'gallery' ? (
+            <Gallery />
         ) : activePage === 'service-detail' ? (
             <ServiceDetail 
                 {...currentServiceData} 
