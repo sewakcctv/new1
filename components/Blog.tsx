@@ -1,25 +1,6 @@
 import React from 'react';
 import { Button } from './Button';
 
-// Icons for placeholders
-const CameraIcon = () => (
-  <svg className="w-16 h-16 text-electric/40 mb-4 group-hover:text-electric transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-  </svg>
-);
-
-const ShieldIcon = () => (
-  <svg className="w-16 h-16 text-electric/40 mb-4 group-hover:text-electric transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-  </svg>
-);
-
-const ChipIcon = () => (
-  <svg className="w-16 h-16 text-electric/40 mb-4 group-hover:text-electric transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-  </svg>
-);
-
 export const posts = [
   {
     id: 1,
@@ -27,7 +8,7 @@ export const posts = [
     category: "Local News",
     date: "Oct 24, 2024",
     excerpt: "With the holiday season approaching, package theft is spiking in Brampton and Mississauga. Here are 3 actionable steps to secure your deliveries.",
-    icon: <CameraIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1626266061368-46a838352604?auto=format&fit=crop&q=80&w=800", // Package/Doorstep
     readTime: "4 min read"
   },
   {
@@ -36,7 +17,7 @@ export const posts = [
     category: "Tech Tips",
     date: "Oct 12, 2024",
     excerpt: "Wireless cameras seem convenient, but battery issues and WiFi jamming are real risks. Discover why we recommend hardwired IP systems for reliability.",
-    icon: <ChipIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=800", // CCTV
     readTime: "6 min read"
   },
   {
@@ -45,7 +26,7 @@ export const posts = [
     category: "Commercial Security",
     date: "Sep 28, 2024",
     excerpt: "Still using physical metal keys? You might be exposing your business to internal theft. Learn about the benefits of switching to fob or mobile access.",
-    icon: <ShieldIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1625314897458-9e7395790277?auto=format&fit=crop&q=80&w=800", // Access Control
     readTime: "5 min read"
   },
   {
@@ -54,7 +35,7 @@ export const posts = [
     category: "Company News",
     date: "Sep 15, 2024",
     excerpt: "A look back at our journey from a single van to a fleet of technicians protecting over 200 local families and businesses.",
-    icon: <ShieldIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800", // Technician
     readTime: "3 min read"
   }
 ];
@@ -88,13 +69,16 @@ export const Blog: React.FC<BlogProps> = ({ onReadMore }) => {
                 key={post.id} 
                 className="group bg-navy-900 rounded-xl overflow-hidden border border-navy-700 hover:border-electric transition-all duration-300 hover:-translate-y-1 shadow-lg"
               >
-                {/* Image Placeholder */}
-                <div className="h-64 bg-navy-900 relative overflow-hidden flex items-center justify-center border-b border-navy-700">
-                  <div className="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#64ffda_25%,transparent_25%,transparent_75%,#64ffda_75%,#64ffda),linear-gradient(45deg,#64ffda_25%,transparent_25%,transparent_75%,#64ffda_75%,#64ffda)] bg-[length:20px_20px]"></div>
-                  <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
-                    {post.icon}
-                  </div>
-                  <div className="absolute top-4 left-4 bg-navy-800/90 backdrop-blur px-3 py-1 rounded text-xs font-bold text-electric uppercase tracking-wider border border-navy-700">
+                {/* Image */}
+                <div className="h-64 relative overflow-hidden border-b border-navy-700">
+                  <img 
+                    src={post.imgUrl} 
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-navy-900/20 group-hover:bg-transparent transition-colors"></div>
+                  
+                  <div className="absolute top-4 left-4 bg-navy-900/90 backdrop-blur px-3 py-1 rounded text-xs font-bold text-electric uppercase tracking-wider border border-navy-700">
                     {post.category}
                   </div>
                 </div>

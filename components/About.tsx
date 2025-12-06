@@ -42,9 +42,13 @@ export const About: React.FC = () => {
     <div className="pt-20">
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 bg-navy-900 overflow-hidden">
-        {/* Abstract Background */}
-        <div className="absolute inset-0 bg-navy-900">
-           <div className="absolute inset-0 bg-[linear-gradient(30deg,#112240_12%,transparent_12.5%,transparent_87%,#112240_87.5%,#112240),linear-gradient(150deg,#112240_12%,transparent_12.5%,transparent_87%,#112240_87.5%,#112240),linear-gradient(30deg,#112240_12%,transparent_12.5%,transparent_87%,#112240_87.5%,#112240),linear-gradient(150deg,#112240_12%,transparent_12.5%,transparent_87%,#112240_87.5%,#112240),linear-gradient(60deg,#11224077_25%,transparent_25.5%,transparent_75%,#11224077_75%,#11224077),linear-gradient(60deg,#11224077_25%,transparent_25.5%,transparent_75%,#11224077_75%,#11224077)] bg-[length:80px_140px] opacity-20"></div>
+        {/* Background Image */}
+        <div className="absolute inset-0">
+             <img 
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2301" 
+                alt="Modern Office Team" 
+                className="w-full h-full object-cover opacity-30"
+            />
            <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/80 to-transparent"></div>
         </div>
 

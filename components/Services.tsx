@@ -1,4 +1,5 @@
 import React from 'react';
+import { RevealOnScroll } from './RevealOnScroll';
 
 // Icons for services
 const CameraIcon = () => (
@@ -83,49 +84,52 @@ interface ServicesProps {
 
 export const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
   return (
-    <section id="services" className="py-24 bg-navy-900 relative">
+    <section id="services" className="py-24 bg-slate-50 relative">
         {/* Decorative background element */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-electric/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <span className="text-electric font-mono text-sm tracking-wider uppercase mb-2 block">What We Do</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-lighter mb-6">
-            Our Services
-          </h2>
-          <p className="max-w-2xl mx-auto text-slate-light text-lg">
-            Comprehensive security solutions tailored to protect what matters most to you.
-          </p>
-        </div>
+        <RevealOnScroll>
+            <div className="text-center mb-16">
+            <span className="text-electric font-mono text-sm tracking-wider uppercase mb-2 block">What We Do</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
+                Our Services
+            </h2>
+            <p className="max-w-2xl mx-auto text-slate-600 text-lg">
+                Comprehensive security solutions tailored to protect what matters most to you.
+            </p>
+            </div>
+        </RevealOnScroll>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service, index) => (
-            <div 
-              key={index} 
-              className="bg-navy-800 rounded-xl p-8 border border-navy-700 hover:border-electric transition-all duration-300 group hover:shadow-[0_10px_30px_-10px_rgba(2,12,27,0.7)]"
-            >
-              <div className="mb-6 inline-block p-3 rounded-lg bg-navy-900 group-hover:bg-navy-700 transition-colors">
-                {service.icon}
-              </div>
-              
-              <h3 className="text-2xl font-bold text-slate-lighter mb-4 group-hover:text-electric transition-colors">
-                {service.title}
-              </h3>
-              
-              <p className="text-slate-light mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              
-              <button 
-                onClick={() => onServiceClick && onServiceClick(service.id)}
-                className="inline-flex items-center text-electric font-semibold hover:text-electric/80 transition-colors group-hover:translate-x-1 duration-300"
-              >
-                Learn More
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            </div>
+            <RevealOnScroll key={index} delay={index * 0.1}>
+                <div 
+                className="bg-white rounded-sm p-8 border border-slate-200 hover:border-electric transition-all duration-300 group hover:shadow-lg h-full"
+                >
+                <div className="mb-6 inline-block p-3 rounded-sm bg-slate-50 group-hover:bg-slate-100 transition-colors">
+                    {service.icon}
+                </div>
+                
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-electric transition-colors">
+                    {service.title}
+                </h3>
+                
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                    {service.description}
+                </p>
+                
+                <button 
+                    onClick={() => onServiceClick && onServiceClick(service.id)}
+                    className="inline-flex items-center text-electric font-semibold hover:text-electric/80 transition-colors group-hover:translate-x-1 duration-300"
+                >
+                    Learn More
+                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </button>
+                </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

@@ -25,28 +25,61 @@ export interface ServicePageProps {
   onGetQuote?: () => void;
 }
 
-// Visual Placeholder for "Images"
-const TechVisualPlaceholder = ({ icon, align = 'left' }: { icon?: React.ReactNode, align?: 'left' | 'right' }) => (
-  <div className={`relative h-64 md:h-80 w-full rounded-lg overflow-hidden bg-navy-800 border border-navy-700 group ${align === 'right' ? 'md:order-last' : ''}`}>
-    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(100,255,218,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%,100%_100%] animate-[gradient_15s_ease_infinite]"></div>
+// Map service titles to Unsplash Images
+const getImageForService = (title: string, index: number) => {
+    // Default Fallbacks
+    const defaults = [
+        "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1000", // Cameras
+        "https://images.unsplash.com/photo-1558494949-efc02220ec98?auto=format&fit=crop&q=80&w=1000", // Servers
+    ];
     
-    {/* Grid Pattern Overlay */}
-    <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#8892b0_1px,transparent_1px),linear-gradient(to_bottom,#8892b0_1px,transparent_1px)] bg-[size:2rem_2rem]"></div>
+    const lower = title.toLowerCase();
     
-    {/* Central Icon */}
-    <div className="absolute inset-0 flex items-center justify-center text-electric/20 group-hover:text-electric/40 transition-colors duration-500 transform group-hover:scale-110">
-      {icon || (
-        <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
-           <path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-        </svg>
-      )}
-    </div>
+    if (lower.includes('camera') || lower.includes('monitoring')) {
+        return index === 0 
+            ? "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1000" // CCTV
+            : "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1000"; // Tech working
+    }
+    if (lower.includes('access') || lower.includes('intercom')) {
+        return index === 0
+            ? "https://images.unsplash.com/photo-1625314897458-9e7395790277?auto=format&fit=crop&q=80&w=1000" // Hand scan
+            : "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000"; // Office
+    }
+    if (lower.includes('cabling')) {
+        return index === 0
+            ? "https://images.unsplash.com/photo-1544197150-b99a580bbc7c?auto=format&fit=crop&q=80&w=1000" // Cables
+            : "https://images.unsplash.com/photo-1558494949-efc02220ec98?auto=format&fit=crop&q=80&w=1000"; // Server Room
+    }
+    if (lower.includes('alarm')) {
+        return index === 0
+            ? "https://images.unsplash.com/photo-1558036117-15db97929410?auto=format&fit=crop&q=80&w=1000" // Home
+            : "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1000"; // Smart app
+    }
 
-    {/* Decorative accents */}
-    <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-electric opacity-50"></div>
-    <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-electric opacity-50"></div>
-  </div>
-);
+    return defaults[index % defaults.length];
+}
+
+// Visual Image Component
+const ServiceImageCard = ({ title, index }: { title: string, index: number }) => {
+    const imgSrc = getImageForService(title, index);
+    
+    return (
+        <div className={`relative h-64 md:h-80 w-full rounded-lg overflow-hidden bg-navy-800 border border-navy-700 shadow-xl group`}>
+            {/* Image */}
+            <img 
+                src={imgSrc} 
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            
+            {/* Dark Overlay for "Tech" feel */}
+            <div className="absolute inset-0 bg-navy-900/20 group-hover:bg-navy-900/0 transition-colors duration-500"></div>
+
+            {/* Decorative accents */}
+            <div className="absolute top-0 left-0 w-full h-full border-4 border-transparent group-hover:border-electric/20 transition-colors duration-500 rounded-lg pointer-events-none"></div>
+        </div>
+    );
+};
 
 const CheckIcon = () => (
   <svg className="w-5 h-5 text-electric mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,7 +139,7 @@ export const ServiceDetail: React.FC<ServicePageProps> = ({
              <div key={index} className="flex flex-col md:flex-row items-center gap-12">
                 {/* Visual */}
                 <div className={`w-full md:w-1/2 ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
-                    <TechVisualPlaceholder icon={benefit.icon} align={index % 2 !== 0 ? 'right' : 'left'} />
+                    <ServiceImageCard title={title} index={index} />
                 </div>
                 
                 {/* Content */}

@@ -2,80 +2,61 @@ import React from 'react';
 import { Button } from './Button';
 import { PHONE_LINK } from '../constants';
 
-// Icons for placeholders to make them visually distinct
-const HomeIcon = () => (
-  <svg className="w-16 h-16 text-slate-700 group-hover:text-electric/50 transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-  </svg>
-);
-
-const CameraIcon = () => (
-  <svg className="w-16 h-16 text-slate-700 group-hover:text-electric/50 transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-  </svg>
-);
-
-const ChipIcon = () => (
-  <svg className="w-16 h-16 text-slate-700 group-hover:text-electric/50 transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-  </svg>
-);
-
 const projects = [
   {
     id: 1,
     title: "Neat Cabling in Brampton Warehouse",
     category: "Cabling",
-    icon: <ChipIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1544197150-b99a580bbc7c?auto=format&fit=crop&q=80&w=600",
     description: "Structured Cat6 installation organized in server rack."
   },
   {
     id: 2,
     title: "Dome Camera Install",
     category: "Commercial",
-    icon: <CameraIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=600",
     description: "Vandal-proof dome cameras for retail perimeter."
   },
   {
     id: 3,
     title: "Luxury Home Security",
     category: "Residential",
-    icon: <HomeIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1558036117-15db97929410?auto=format&fit=crop&q=80&w=600",
     description: "Integrated smart alarm and camera system."
   },
   {
     id: 4,
     title: "Office Access Control",
     category: "Commercial",
-    icon: <ChipIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600",
     description: "Keycard entry system for 50+ employee office."
   },
   {
     id: 5,
     title: "Industrial PTZ Deployment",
     category: "Industrial",
-    icon: <CameraIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600",
     description: "Long-range PTZ cameras for logistics yard monitoring."
   },
   {
     id: 6,
     title: "Video Intercom Upgrade",
     category: "Residential",
-    icon: <HomeIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1512446733611-9099a758eed8?auto=format&fit=crop&q=80&w=600",
     description: "Cloud-connected video doorbell for remote access."
   },
   {
     id: 7,
     title: "Fiber Optic Backbone",
     category: "Cabling",
-    icon: <ChipIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1558494949-efc02220ec98?auto=format&fit=crop&q=80&w=600",
     description: "High-speed fiber uplinks between warehouse units."
   },
   {
     id: 8,
     title: "Night Vision Calibration",
     category: "Commercial",
-    icon: <CameraIcon />,
+    imgUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600",
     description: "Optimizing IR settings for pitch-black parking lot."
   }
 ];
@@ -122,20 +103,20 @@ export const Gallery: React.FC = () => {
                 key={project.id} 
                 className="group relative bg-navy-900 rounded-lg overflow-hidden border border-navy-700 hover:border-electric transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
               >
-                {/* Image Placeholder Area */}
-                <div className="h-64 bg-navy-900 relative overflow-hidden">
-                   {/* Background Pattern */}
-                   <div className="absolute inset-0 opacity-20 bg-[linear-gradient(45deg,#112240_25%,transparent_25%,transparent_75%,#112240_75%,#112240),linear-gradient(45deg,#112240_25%,transparent_25%,transparent_75%,#112240_75%,#112240)] bg-[length:20px_20px]"></div>
-                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-80"></div>
+                {/* Image Area */}
+                <div className="h-64 relative overflow-hidden">
+                   <img 
+                      src={project.imgUrl} 
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                   />
                    
-                   {/* Centered Icon */}
-                   <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-700">
-                      {project.icon}
-                   </div>
+                   {/* Overlay */}
+                   <div className="absolute inset-0 bg-navy-900/40 group-hover:bg-navy-900/10 transition-colors duration-500"></div>
 
                    {/* Category Tag */}
                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-navy-800/90 backdrop-blur-sm border border-electric/30 text-electric text-xs font-bold rounded uppercase tracking-wider">
+                      <span className="px-3 py-1 bg-navy-900/90 backdrop-blur-sm border border-electric/30 text-electric text-xs font-bold rounded uppercase tracking-wider">
                         {project.category}
                       </span>
                    </div>
